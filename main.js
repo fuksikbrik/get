@@ -1,5 +1,4 @@
 
-
 const questions = [
 	//1
 	{
@@ -29,9 +28,8 @@ const questions = [
     },
     {
         question:"УКАЖИТЕ ПЛОЩАДЬ КВАРТИРЫ",
-        answers:[
-            '<input placeholder="0м²">'
-        ]
+        isInput: true,
+        input: '<input type="number" placeholder="0м²">',
     },
     {
         question:" ВЫБЕРИТЕ ПОДАРОК",
@@ -44,9 +42,8 @@ const questions = [
     },
     {
         question:"УКАЖИТЕ НОМЕР ТЕЛЕФОНА",
-        answers:[
-            '<input placeholder="+7">'
-        ]
+        isInput: true,
+        input: '<input placeholder="+7">'
     }    
 
 ];
@@ -77,42 +74,53 @@ const showQuestion = (index) => {
 						`;
   question.classList.add('title-and-number');
 
-  const answers = questions[index].answers.map((el, index) => {
-    
-	
-	const answer = document.createElement("div");
-    answer.innerHTML = `
-					    <p class="answer" data-value="${el}">${el}</p>`;
-	
-	answer.classList.add('quiz-card')
-	answer.dataset.value = index + 1
-    return answer;
-	
-	
-  });
+  let answers = [];
 
-  answers.forEach( (answer) =>{
-	answer.addEventListener('click', function (event) {
-		finalAnswers[index] = event.target.dataset.value;
-	});
-  });
-  
-  
+  if(!questions[index].isInput){
+      answers = questions[index].answers.map((el, index) => {
+        const answer = document.createElement("div");
+        answer.innerHTML = `
+                            <p class="answer" data-value="${el}">${el}</p>`;
 
-  quizDiv.appendChild(question);
-  answers.forEach((answer) => {
-    quizDiv.appendChild(answer);
-  });
+        answer.classList.add('quiz-card')
+        answer.dataset.value = index + 1
+        return answer;
 
-  answers.forEach((answer) => {
-    answer.addEventListener("click", (event) => {
-		nextButton.disabled = false
-		answers.forEach((removeClass) => {
-			removeClass.classList.remove('active');
-		});
-	  answer.classList.add('active')
-    });
-  });
+      });
+
+      answers.forEach( (answer) =>{
+        answer.addEventListener('click', function (event) {
+            finalAnswers[index] = event.target.dataset.value;
+        });
+      });
+
+      quizDiv.appendChild(question);
+      answers.forEach((answer) => {
+          quizDiv.appendChild(answer);
+      });
+
+      answers.forEach((answer) => {
+          answer.addEventListener("click", (event) => {
+              nextButton.disabled = false
+              answers.forEach((removeClass) => {
+                  removeClass.classList.remove('active');
+              });
+              answer.classList.add('active')
+          });
+      });
+  }
+  else{
+      const input = document.createElement("div")
+      input.innerHTML = questions[index].input;
+      quizDiv.appendChild(input);
+
+      input.addEventListener("input", (e)=>{
+          finalAnswers[index] = e.target.value;
+          if(e.target.value) nextButton.disabled = false
+          else nextButton.disabled = true
+      })
+  }
+
 };
  
 
@@ -144,9 +152,9 @@ const start = () => {
 		btns.innerHTML = ``;
 		let test       = document.querySelector(".respons-output[data-score='" + maxNum + "']");;
 		console.log(test)
-		test.classList.remove('disabled');
+		 test.classList.remove('disabled');
 		divBtns.classList.remove('btns');
-		ym(93050216,'reachGoal','finalQuestion');
+		
 	}
 	quizDiv.innerHTML = ``;
 	indexQuestion++;
