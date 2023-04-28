@@ -226,6 +226,7 @@ margin: 0;
 }
 .answer{
 margin: 20px 0px 0px 0px ;
+padding: 100px;
 }
 .dots{
     display: flex;

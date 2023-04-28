@@ -81,7 +81,7 @@ const showQuestion = (index) => {
     
 	
 	const answer = document.createElement("div");
-    answer.innerHTML = `<p class="number-answer" data-value="${el}">${el}.</p>
+    answer.innerHTML = `
 					    <p class="answer" data-value="${el}">${el}</p>`;
 	
 	answer.classList.add('quiz-card')
