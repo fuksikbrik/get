@@ -60,7 +60,7 @@ let lastLevel     = 0;
 let indexQuestion = 1;
 let prevButton = document.querySelector(".prev");
 let nextButton = document.querySelector(".next");
-let answer = document.querySelector(".answer-quiz-end");
+let answerQuiz = document.querySelector(".answer-quiz-end");
 nextButton.disabled = true
 prevButton.disabled = true
 
@@ -138,7 +138,7 @@ const start = () => {
 		
 		btns.innerHTML = ``;
     quizDiv.innerHTML = ``;
-    answer.classList.add('active-answer-quiz')
+    answerQuiz.classList.add('active-answer-quiz')
     
 		
 	}
