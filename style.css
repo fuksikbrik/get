@@ -228,6 +228,12 @@ margin: 0;
 margin: 0;
 padding: 100px;
 }
+.answer-quiz-end{
+    opacity: 0;
+}
+.active-answer-quiz{
+    opacity: 1;
+}
 .dots{
     display: flex;
     justify-content: center;

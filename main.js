@@ -60,6 +60,7 @@ let lastLevel     = 0;
 let indexQuestion = 1;
 let prevButton = document.querySelector(".prev");
 let nextButton = document.querySelector(".next");
+let answer = document.querySelector(".answer-quiz-end");
 nextButton.disabled = true
 prevButton.disabled = true
 
@@ -128,32 +129,17 @@ const start = () => {
   let questionIndex = 0;
   let divBtns    = document.querySelector(".btns");
 
-  function findMostFrequent() {
-	const freq = {};
-	let maxFreq = 0;
-	let maxNum;
-  
-	for (const num of finalAnswers) {
-	  freq[num] = (freq[num] || 0) + 1;
-	  if (freq[num] > maxFreq) {
-		maxFreq = freq[num];
-		maxNum = num;
-	  }
-	}
-	return maxNum;
-  }
  nextButton.addEventListener("click", (event) => {
-	findMostFrequent()
+	
 	nextButton.disabled = true
 	prevButton.disabled = false
 	
 	if(indexQuestion == questions.length ){
-		let maxNum = findMostFrequent()
+		
 		btns.innerHTML = ``;
-		let test       = document.querySelector(".respons-output[data-score='" + maxNum + "']");;
-		console.log(test)
-		 test.classList.remove('disabled');
-		divBtns.classList.remove('btns');
+    quizDiv.innerHTML = ``;
+    answer.classList.add('active-answer-quiz')
+    
 		
 	}
 	quizDiv.innerHTML = ``;
