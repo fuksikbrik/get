@@ -26,6 +26,19 @@ body{
 a {
     text-decoration: none;
 }
+input:focus-visible {
+    outline: none;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
 .background{
     background: url(./image/background.png) ;
     background-size: cover ;
@@ -110,6 +123,7 @@ a {
     gap: 20px;
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
 }
 .quiz-wrapper{
     max-width: 1160px;
@@ -119,12 +133,12 @@ a {
     align-self: center;
 }
 
-.quiz-card{
-    width: 537px;
+.quiz-card, input{
+    position: relative;
+    min-width: 150px;
     height: 210px;
     border: 1px solid #000000;
     border-radius: 30px;
-  
     font-family: SBS-R;
     font-style: normal;
     font-weight: 400;
@@ -132,20 +146,46 @@ a {
     line-height: 114.4%;
     color: #3A3A3A;
     transition: 0.5s;
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    text-align: center;
+    justify-content: center;
+    flex-flow: column;
+}
+.quiz-card div {
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: 1s all ease;
+}
+.quiz-card:hover > div {
+    max-height: 100px;
+    opacity: 1;
+}
+.quiz-card span {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+}
+.quiz-card:hover > span svg g path {
+    fill: #FFF;
+}
+.quiz-card:hover > span svg g {
+    opacity: 1;
 }
 .quiz-card:hover > .number-answer{
     color: white !important;
 }
 .quiz-card:hover{
-    background: #7A3BA4;
-    color: white;
+    background: #FFA216;
+    /* color: white; */
 }
 .number-answer:hover{
     color: white;
 }
 .active{
-    background: #7A3BA4;
-    color: #FFFFFF !important;
+    background: #FFA216;
 }
 .active > .number-answer{
     color: white !important;
@@ -182,9 +222,9 @@ a {
     color: #3A3A3A;
 }
 .next{
-    background: #7A3BA4;
+    background: #FFF;
     border-radius: 30px;
-    border: 0;
+    border: 1px solid #000;
     width: 150px;
     height: 54px;
     font-family: SBS-B;
@@ -194,14 +234,14 @@ a {
     line-height: 114.4%;
     text-align: center;
     text-transform: uppercase;  
-    color: #FFFFFF;
+    color: #000;
     transition: 0.3s;  
 }
 .next:hover{
-    background-color: #984acc;
+    background-color: #FFA216;
 }
 .prev:hover{
-    background-color: #984acc;
+    background-color: #FFA216;
 }
 .prev{
     font-family: SBS-B;
@@ -211,9 +251,9 @@ a {
     line-height: 114.4%;
     text-align: center;
     text-transform: uppercase;
-    color: #FFFFFF;
-    background: #7A3BA4;
-    border: 0;
+    color: #000;
+    /* background: #FFA216; */
+    border: 1px solid #000;
     border-radius: 30px;
     width: 150px;
     height: 54px;
@@ -226,7 +266,7 @@ margin: 0;
 }
 .answer{
 margin: 0;
-padding: 100px;
+/* padding: 100px; */
 }
 .answer-quiz-end{
     opacity: 0;
@@ -239,7 +279,7 @@ padding: 100px;
     justify-content: center;
 }
 .dots-purple{
-    background: #7A3BA4;
+    background: #FFA216;
     opacity: 0.2;
     width: 15px;
     height: 15px;
@@ -267,7 +307,7 @@ padding: 100px;
     line-height: 140%;
     text-align: center;
     text-transform: uppercase;
-    color: #7A3BA4;
+    color: #FFA216;
     opacity: 0.3;
     margin: 50px 0px 20px 0px;
 }
@@ -371,7 +411,7 @@ padding: 100px;
     font-family: SBS-R;
 }
 a.testRepeat:hover, .button-main:hover {
-    background: #7A3BA4;
+    background: #FFA216;
     color: #FFF;
 }
 .circleText {
@@ -379,6 +419,9 @@ a.testRepeat:hover, .button-main:hover {
     left: 10%;
     top: 10%;
     animation: circleText 45s linear infinite;
+}
+.el0, .el1, .el2, .el3 {
+    flex: 0 0 20%;
 }
 @keyframes circleText {
     0% {
